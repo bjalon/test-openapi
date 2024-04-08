@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  title: Exemple API
+  version: 1.0.0
+paths:
+  /items:
+    get:
+      summary: Liste des items
+      tags:
+        - private
+      responses:
+        '200':
+          description: Liste réussie des items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    put:
+      summary: Mettre à jour un item
+      tags:
+        - private
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: Item mis à jour
+    post:
+      summary: Créer un item
+      tags:
+        - private
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':
+          description: Item créé
+  /users:
+    get:
+      summary: Liste des utilisateurs
+      tags:
+        - public
+      responses:
+        '200':
+          description: Liste réussie des utilisateurs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    put:
+      summary: Mettre à jour un utilisateur
+      tags:
+        - public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Utilisateur mis à jour
+    post:
+      summary: Créer un utilisateur
+      tags:
+        - public
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Utilisateur créé
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            zipCode:
+              type: string
+        preferences:
+          type: array
+          items:
+            type: string
